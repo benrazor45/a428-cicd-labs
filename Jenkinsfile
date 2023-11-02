@@ -16,13 +16,15 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-        stage('Deploy') {
-            timeout(time: 1, unit: 'MINUTES') {
-                steps {
-                    sh './jenkins/scripts/deliver.sh'
+        stage('Deploy') { 
+            steps {
+                sh './jenkins/scripts/deliver.sh'
+                script {
+                sleep time: 60, unit: 'SECONDS' 
+              }
+              sh './jenkins/scripts/kill.sh'
             }
         }
-    }
 
     }
 }
